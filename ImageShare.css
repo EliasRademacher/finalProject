@@ -1,0 +1,35 @@
+form {
+	margin-left: auto;
+  margin-right: auto;
+	border-radius: 5px;
+	background-color: #2E2E1F;
+	color: white;
+	padding: 30px;	
+}
+
+textarea, input[type="text"], input[type="file"] {
+	border-radius: 5px;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+#story {
+	margin-bottom: 20px;
+	background-color: #CCFFFF;
+}
+
+#caption {
+	margin-right: 40px;
+	width: 300px;
+	background-color: #CCFFFF
+}
+
+body {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	padding-top: 25px;
+	padding-right: 100px;
+	padding-bottom: 25px;
+	padding-left: 100px;
+	background-color: white;
+}
+
+
