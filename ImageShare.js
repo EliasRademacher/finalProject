@@ -19,45 +19,66 @@ story.addEventListener("click",
 var articleList = document.getElementsByTagName("article");
 
 for (var i = 0; i < articleList.length; i++) {
-	articleList[i].style.textAlign = "center";
-	articleList[i].style.margin = "20px";
-	articleList[i].style.cssFloat = "left";
-	articleList[i].style.boxShadow = "5px 10px 30px";
 	
-	var title = articleList[i].childNodes[0];
-	var image = articleList[i].childNodes[1];
-	var story = articleList[i].childNodes[2];
+	var article = articleList[i];
+	
+	article.style.textAlign = "center";
+	article.style.margin = "20px";
+	article.style.cssFloat = "left";
+	article.style.boxShadow = "5px 10px 30px";
+	
+	
+	var title = article.childNodes[0];
+	var author = article.childNodes[1];
+	var image = article.childNodes[2];
+	var story = article.childNodes[3];
 	image.style.borderRadius = "5px";
 	
-	image.addEventListener("click", 
+	article.addEventListener("click", 
 		function() {
-			if (this.style.height == "100px") {
-				this.style.height = "";
-				this.style.maxHeight = "500px";
-				this.previousSibling.style.color = "white";
-				this.nextSibling.style.display = "";
-				this.nextSibling.style.color = "white";
-				this.parentNode.style.padding = "10px";
-				this.parentNode.style.border = "15px groove #2E2E1F";
-				this.parentNode.style.borderRadius = "5px";
-				this.parentNode.style.backgroundColor = "black";
+			var title = this.childNodes[0];
+			var author = this.childNodes[1];
+			var image = this.childNodes[2];
+			var story = this.childNodes[3];
+			
+			
+			if (image.style.height == "150px") {
+				image.style.height = "500px";
+				image.style.maxWidth = "450px";
+				this.style.maxWidth = "500px";
+				
+				image.style.maxHeight = "500px";
+				image.style.height = "";
+				title.style.color = "white";
+				author.style.color = "white";
+				story.style.width = "100%";
+				story.style.display = "";
+				story.style.color = "white";
+				
+				
+				this.style.padding = "10px";
+				this.style.border = "15px groove #2E2E1F";
+				this.style.borderRadius = "5px";
+				this.style.backgroundColor = "black";
 			}
 			
-			else if (this.style.height == "") {
-				this.style.height = "100px";
+			else {
+				image.style.height = "150px";
+				title.style.color = "black";
+				author.style.color = "black";
+				story.style.display = "none";
+				
 				this.style.cursor = "pointer";
-				this.previousSibling.style.color = "black";
-				this.nextSibling.style.display = "none";
-				this.parentNode.style.padding = "2px";
-				this.parentNode.style.border = "1px solid #2E2E1F";
-				this.parentNode.style.borderRadius = "5px";
-				this.parentNode.style.backgroundColor = "";
+				this.style.padding = "2px";
+				this.style.border = "1px solid #2E2E1F";
+				this.style.borderRadius = "5px";
+				this.style.backgroundColor = "";
 			}
 		}
 	);
 	
 	
-	image.click();
+	article.click();
 	
 }
 
