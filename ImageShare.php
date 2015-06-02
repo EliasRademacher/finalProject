@@ -33,21 +33,23 @@ if (!$loggedIn) {
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-$uploaddir = "/nfs/stak/students/r/rademace/public_html/ImageShare/uploads";
-$uploadfilename = basename($_FILES['image']['name']);
-$uploadfile = $uploaddir . "/" . $uploadfilename;
-$tmpName = $_FILES['image']['tmp_name'];
 
-if (0 < $_FILES['image']['error'])
-	echo 'Error: ' . $_FILES['image']['error'] . '<br>';
+if (isset($_FILES['image']['name']))  {
+	$uploaddir = "/nfs/stak/students/r/rademace/public_html/ImageShare/uploads";
+	$uploadfilename = basename($_FILES['image']['name']);
+	$uploadfilename = str_replace('\'', '', $uploadfilename); //strip apostrophes
+	$uploadfile = $uploaddir . "/" . $uploadfilename;
+	$tmpName = $_FILES['image']['tmp_name'];
 
-else {
-	$retVal = move_uploaded_file($tmpName, $uploadfile);
-	if (!$retVal)
-		echo "<font color=orange>File upload failed</font><br>";
+	if (0 < $_FILES['image']['error'])
+		echo 'Error: ' . $_FILES['image']['error'] . '<br>';
+
+	else {
+		$retVal = move_uploaded_file($tmpName, $uploadfile);
+		if (!$retVal)
+			echo "<font color=orange>File upload failed</font><br>";
+	}
 }
-
-
 
 
 
@@ -56,12 +58,12 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu",
 	"rademace-db", "8xYcLE6mhsNKxGMP", "rademace-db");
 if (!$mysqli || $mysqli->connect_errno)
 	echo "Connection error: " . $mysqli->connect_errno . " " . $mysqli->connect_error . "<br>";
-else
-	echo "<font color=green>Connected to onid database</font><br>";
+// else
+	// echo "<font color=green>Connected to onid database</font><br>";
 
 
 
-/* Create database if it does not already exist */
+/* Create table if it does not already exist */
 $result = $mysqli->query("SHOW TABLES LIKE 'Stories'");
 if ($result === FALSE)
     echo "Query failed <br>";
@@ -100,7 +102,6 @@ if(isset($_POST['title'])) {
 	}
 	
 	else {
-		/* Make sure ther are no apostrophes in image name */
 		$image = $uploadfilename;
 		$title = str_replace ('\'', '\\\'', $_POST['title']);
 		$story = str_replace ('\'', '\\\'', $_POST['story']);
@@ -110,8 +111,14 @@ if(isset($_POST['title'])) {
 			('$title', '$story', '$image', '$author')")))
 			echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error . "<br>";
 
-		if (!$statement->execute())
-			echo "Execute failed: (" . $statement->errno . ") " . $statement->error . "<br>";
+		if (!$statement->execute()) {
+			if ($statement->errno == 1062)
+				echo "<font color=red>This title is already being used</font><br>";
+			
+			else
+				echo "Execute failed: (" . $statement->errno . ") " . $statement->error . "<br>";
+			
+		}
 		
 		$statement->close();
 	}

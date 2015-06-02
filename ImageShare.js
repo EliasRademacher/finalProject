@@ -49,6 +49,7 @@ for (var i = 0; i < articleList.length; i++) {
 				
 				image.style.maxHeight = "500px";
 				image.style.height = "";
+				title.style.maxWidth = "";
 				title.style.color = "white";
 				author.style.color = "white";
 				story.style.width = "100%";
@@ -65,11 +66,12 @@ for (var i = 0; i < articleList.length; i++) {
 			else {
 				image.style.height = "150px";
 				title.style.color = "black";
+				title.style.maxWidth = "300px";
 				author.style.color = "black";
 				story.style.display = "none";
 				
 				this.style.cursor = "pointer";
-				this.style.padding = "2px";
+				this.style.padding = "5px";
 				this.style.border = "1px solid #2E2E1F";
 				this.style.borderRadius = "5px";
 				this.style.backgroundColor = "";
