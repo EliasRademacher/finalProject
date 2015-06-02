@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+
+<?php
+if (!$loggedIn) {
+	echo 'You are not logged in<br>
+		Click <a href="http://web.engr.oregonstate.edu/~rademace/ImageShare/ImageShareLogin.html">here</a>
+		to login<br>';
+	exit(0);
+}
+
+?>
 <html>
 <head>
 	<title>Image Share</title>
@@ -20,8 +30,6 @@
 	</form> 
 
 <?php
-include "UserAccountHandler.php";
-
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
@@ -36,9 +44,8 @@ if (0 < $_FILES['image']['error'])
 else {
 	$retVal = move_uploaded_file($tmpName, $uploadfile);
 	if (!$retVal)
-		echo "File upload failed.<br/>\n";
+		echo "<font color=orange>File upload failed</font><br>";
 }
-
 
 
 
@@ -50,7 +57,7 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu",
 if (!$mysqli || $mysqli->connect_errno)
 	echo "Connection error: " . $mysqli->connect_errno . " " . $mysqli->connect_error . "<br>";
 else
-	echo "Connected to onid database<br>";
+	echo "<font color=green>Connected to onid database</font><br>";
 
 
 
@@ -65,7 +72,8 @@ else if ($result->num_rows < 1) {
 		id INT PRIMARY KEY AUTO_INCREMENT,
 		title VARCHAR(255) UNIQUE,
 		story TEXT,
-		image VARCHAR(255) NOT NULL
+		image VARCHAR(255) NOT NULL,
+		author VARCHAR(255)
 		)") === TRUE) {
 			echo "Table 'Stories' created successfully<br>";
 		}
@@ -92,12 +100,14 @@ if(isset($_POST['title'])) {
 	}
 	
 	else {
+		/* Make sure ther are no apostrophes in image name */
 		$image = $uploadfilename;
 		$title = str_replace ('\'', '\\\'', $_POST['title']);
 		$story = str_replace ('\'', '\\\'', $_POST['story']);
+		$author = $_SESSION['name'];
 		
-		if (!($statement = $mysqli->prepare("INSERT INTO Stories(title, story, image) VALUES
-			('$title', '$story', '$image')")))
+		if (!($statement = $mysqli->prepare("INSERT INTO Stories(title, story, image, author) VALUES
+			('$title', '$story', '$image', '$author')")))
 			echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error . "<br>";
 
 		if (!$statement->execute())
@@ -109,17 +119,18 @@ if(isset($_POST['title'])) {
 
 
 /* Display Images */
-if (!($statement = $mysqli->prepare("SELECT title, story, image FROM Stories")))
+if (!($statement = $mysqli->prepare("SELECT title, story, image, author FROM Stories")))
 	echo "prepare failed: (" . $mysqli->errno . ") " . $mysqli->error . "<br>";
-$statement->bind_param("sss", $title, $story, $image); 
+$statement->bind_param("sss", $title, $story, $image, $author); 
 if (!$statement->execute())
 	echo "Execute failed: (" . $statement->errno . ") " . $statement->error . "<br>";
-$statement->bind_result($resultTitle, $resultStory, $resultImage);
+$statement->bind_result($resultTitle, $resultStory, $resultImage, $resultAuthor);
 
 
 while ($statement->fetch()) {
 	echo "<article>";
 	echo "<h3>$resultTitle</h3>";
+	echo "<h4>by $resultAuthor</h4>";
 	echo "<img src='uploads/$resultImage' alt='uploads/$resultImage'/>";
 	echo "<div>$resultStory</div>";
 	echo "</article>\n";
