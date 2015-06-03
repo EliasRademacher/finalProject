@@ -4,9 +4,10 @@
   <title>ImageShare Login</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<link rel="stylesheet" type="text/css" href="ImageShare.css">
+	
  </head>
 <body>
-	<form method="post" action="UserAccountHandler.php">
+	<form method="post" action="UserAccountHandler.php" id="login">
 		<label for="username">Name: </label>
 		<input type="text" name="username" id="username" />
 		
@@ -17,24 +18,24 @@
 	</form>
 	
 	
-	<form method="post" action="UserAccountHandler.php">
-		<label for="usernameInit">Enter your name: </label>
+	<form method="post" action="UserAccountHandler.php" id="createAccount">
+		<label for="usernameInit"id="usernameInitLabel">Enter your name: </label>
 		<input type="text" name="usernameInit" id="usernameInit" />
 		
 		<label for="passwordInit1">Choose a password: </label>
 		<input type="password" name="passwordInit1" id="passwordInit1">
 		
-		<label for="passwordInit2">Confirm your password: </label>
+		<label for="passwordInit2" id="passwordInit2Label">Confirm your password: </label>
 		<input type="password" name="passwordInit2" id="passwordInit2">
 		
 		<input type="submit" value="Submit" id="loginButton"/>
 	</form>
 	
+	<button type="button">Create Account</button> 
 	
 	
 	
 	
-	
-	
+	<script type="text/javascript" src="ImageShareLogin.js"></script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 body {
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	padding-top: 25px;
-	padding-right: 100px;
+	padding-right: 50px;
 	padding-bottom: 25px;
-	padding-left: 100px;
+	padding-left: 50px;
 	background-color: white;
 }
 
@@ -40,3 +40,16 @@ textarea, input[type="text"], input[type="password"], #loginButton {
 	float: right;
 }
 
+button {
+	border-radius: 5px;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-size: 2em;
+	color: #CCFFFF;
+	background-color: #0000CC;
+	height: 150px;
+	width: 150px;
+	margin-left: 45%;
+	/* margin-right: 50%; */
+	margin-top: 10%;
+	/* margin-bottom: 50%; */
+}
