@@ -4,7 +4,18 @@ body {
 	padding-right: 50px;
 	padding-bottom: 25px;
 	padding-left: 50px;
-	background-color: white;
+	background-image: url("bigsky.jpg");
+	/* background-repeat: no-repeat; */
+}
+
+h1 {
+	border-radius: 5px;
+	color: #2E2E1F;
+	padding: 5px;
+	margin-left: 44%;
+	margin-bottom: 50px;
+	margin-top: 50px;
+	
 }
 
 form {
@@ -30,14 +41,18 @@ input[type="file"] {
 }
 
 textarea, input[type="text"], input[type="password"], #loginButton {
+	border-color: #669999;
+	border-width: 3px;
 	border-radius: 5px;
+	border-style: solid;
 	font-family: "Comic Sans MS", cursive, sans-serif;
-	background-color: #CCFFFF;
+	background-color: white;
 	margin-right: 40px;
 	margin-bottom: 30px;
 }
 
 .deleteButton {
+	float: right;
 	margin: 0px;
 	padding: 0px;
 	border-radius: 5px;
@@ -57,9 +72,9 @@ textarea, input[type="text"], input[type="password"], #loginButton {
 #creatAccount {
 	border-radius: 5px;
 	font-family: "Comic Sans MS", cursive, sans-serif;
-	font-size: 2em;
+	font-size: 1.6em;
 	color: #CCFFFF;
-	background-color: #0000CC;
+	background-color: #0033CC;
 	height: 150px;
 	width: 150px;
 	margin-left: 45%;
@@ -79,7 +94,7 @@ div.right-align {
 }
 
 .blue {
-	color: blue;
+	color: #669999;
 }
 
 .green {

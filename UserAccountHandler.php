@@ -1,7 +1,7 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
-header('Content-Type: text/html');
+// error_reporting(E_ALL);
+// ini_set('display_errors', 'On');
+// header('Content-Type: text/html');
 
 
 function login($message) {
@@ -62,6 +62,7 @@ else if ($result->num_rows < 1) {
 	
 
 $loggedIn = FALSE;
+
 	
 /* create new user account */	
 if (isset($_POST['usernameInit']) 
@@ -120,7 +121,11 @@ if (isset($_POST['usernameInit'])
 		
 		$statement->close();
 		
-		echo "<div class=blue>Your account has been created!</div><br>";
+		echo "<h2 class=blue>Welcome, $usernameInit!<br>
+			Your account has been created</h2>
+			<h3 class=blue>click on a story below to read it,<br>
+			or write your own</h3>";
+		$loggedIn = TRUE;
 			
 	}
 	
@@ -137,6 +142,10 @@ else if (isset($_SESSION['loggedIn'])) {
 else if (session_status() == PHP_SESSION_ACTIVE
 				AND isset($_POST['username'])
 				AND isset($_POST['password'])) {
+	
+
+	//echo "Hello $_SESSION[name], you have visited this page $_SESSION[$_visits] times before.  <br>";
+	
 	
 	if (strlen($_POST['username']) == 0) {
 		echo "<div class=red>A username must be entered</div><br>";
@@ -193,6 +202,12 @@ if ($loggedIn){
 	if (isset($_POST['username']))
 		$_SESSION['name'] = $_POST['username'];
 	
+	
+	else if (isset($_POST['usernameInit']))
+		$_SESSION['name'] = $_POST['usernameInit'];
+	
+	
+	
 	$_SESSION['loggedIn'] = true;
 	$_visits = 'visits_' . $_SESSION['name'];
 	
@@ -207,8 +222,7 @@ if ($loggedIn){
 	echo "<div class=right-align>
 					Logged in as <b id=loginName>$_SESSION[name]</b>
 				</div><br>";
-	
-	//echo "Hello $_SESSION[name], you have visited this page $_SESSION[$_visits] times before.  <br>";
+
 	echo "<a href='http://web.engr.oregonstate.edu/~rademace/ImageShare/UserAccountHandler.php?logout=1'
 		class=right-align>Logout</a><br>";
 	

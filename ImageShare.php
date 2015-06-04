@@ -3,8 +3,11 @@
 <?php
 
 if (isset($_POST['deleteID'])) {
-	if ($_POST['author'] != $_SESSION['name'])
+	if ($_POST['author'] != $_SESSION['name']) {
+		var_dump($_POST['author']);
+		var_dump($_SESSION['name']);
 		echo "<div class=red>You are not authorized to delete that post</div>";
+	}
 	
 	else {
 		if (!($stmt = $mysqli->prepare("DELETE FROM Stories
@@ -19,7 +22,7 @@ if (isset($_POST['deleteID'])) {
 
 
 if (!$loggedIn) {
-	echo '<div class=red>You are not logged in</div>
+	echo '<div class=blue>You are not logged in</div>
 		Click <a href="http://web.engr.oregonstate.edu/~rademace/ImageShare/ImageShareLogin.html">here</a>
 		to login<br>';
 	exit(0);
@@ -34,7 +37,8 @@ if (!$loggedIn) {
 	<link rel="stylesheet" type="text/css" href="ImageShare.css">
 </head>
 <body>
-	 <form action="" method="post" id="image_form" enctype="multipart/form-data">
+	<h1>ImageShare</h1>
+	<form action="" method="post" id="image_form" enctype="multipart/form-data">
 		<textarea id="story" name="story"></textarea><br/>
 		
 		<label for="caption">Title</label>		
@@ -47,9 +51,8 @@ if (!$loggedIn) {
 	</form> 
 
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
-
+// error_reporting(E_ALL);
+// ini_set('display_errors', 'On');
 
 if (isset($_FILES['image']['name']))  {
 	$uploaddir = "/nfs/stak/students/r/rademace/public_html/ImageShare/uploads";

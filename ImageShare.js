@@ -5,9 +5,10 @@ var loginName = document.getElementById("loginName");
 var loginName = document.getElementById("loginName");
 
 story.style.width = "100%";
-story.placeholder = "Write a little story that takes place in your picture";
+story.placeholder = "Write a little story here that took place in your photo. \
+	It can be fiction or nonfiction";
 
-story.addEventListener("click", 
+story.oninput =
 	function() {
 		if (this.style.height == "") {
 			this.style.height = "200px";
@@ -16,8 +17,7 @@ story.addEventListener("click",
 		
 		else if (this.style.height == "200px")
 			this.style.height = "";
-	}
-);
+	};
 
 var articleList = document.getElementsByTagName("article");
 
@@ -94,9 +94,10 @@ for (var i = 0; i < articleList.length; i++) {
 				
 				this.style.cursor = "pointer";
 				this.style.padding = "5px";
-				this.style.border = "1px solid #2E2E1F";
+				this.style.border = "1px solid #669999";
 				this.style.borderRadius = "5px";
-				this.style.backgroundColor = "";
+				this.style.backgroundColor = "white";
+				this.style.borderWidth = "3px";
 			}
 		}
 	);
