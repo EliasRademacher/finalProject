@@ -38,8 +38,6 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu",
 	"rademace-db", "8xYcLE6mhsNKxGMP", "rademace-db");
 if (!$mysqli || $mysqli->connect_errno)
 	echo "Connection error: " . $mysqli->connect_errno . " " . $mysqli->connect_error . "<br>";
-// else
-	// echo "<font color=green>Connected to onid database</font><br>";
 	
 	
 /* Create table if it does not already exist */
@@ -76,17 +74,17 @@ if (isset($_POST['usernameInit'])
 	if(isset($_POST['usernameInit'])) {
 			
 		if (strlen($_POST['usernameInit']) == 0) {
-			echo "<font color=red>username is a required field</font><br>";
+			echo "<div class=red>username is a required field</div><br>";
 			login("Return to login page");
 		}
 		
 		if (!isset($_POST['passwordInit1']) OR strlen($_POST['passwordInit1']) == 0) {
-			echo "<font color=red>You must enter a password</font><br>";
+			echo "<div class=red>You must enter a password</div><br>";
 			login("Return to login page");
 		}
 		
 		if (!isset($_POST['passwordInit2']) OR strlen($_POST['passwordInit2']) == 0) {
-			echo "<font color=red>You must confirm your password</font><br>";
+			echo "<div class=red>You must confirm your password</div><br>";
 			login("Return to login page");
 		}
 		
@@ -100,7 +98,7 @@ if (isset($_POST['usernameInit'])
 		}
 		
 		else {
-			echo "<font color=red>Passwords do not match.</font><br><br>";
+			echo "<div class=red>Passwords do not match.</div><br><br>";
 			login("Return to login page");
 		}
 		
@@ -112,7 +110,7 @@ if (isset($_POST['usernameInit'])
 		if (!$statement->execute()) {
 			
 			if ($statement->errno == 1062) {
-				echo "<font color=red>This username is taken</font><br>";
+				echo "<div class=red>This username is taken</div><br>";
 				login("Return to login page");
 			}
 		
@@ -122,7 +120,7 @@ if (isset($_POST['usernameInit'])
 		
 		$statement->close();
 		
-		echo "<font color=blue>Your account has been created!</font><br>";
+		echo "<div class=blue>Your account has been created!</div><br>";
 			
 	}
 	
@@ -132,7 +130,6 @@ if (isset($_POST['usernameInit'])
 /* Is user already logged in? */
 else if (isset($_SESSION['loggedIn'])) {
 	$loggedIn = TRUE;
-	echo "<font color=green class=right-align>Logged in as $_POST[username]</font><br>";
 }
 
 
@@ -142,12 +139,12 @@ else if (session_status() == PHP_SESSION_ACTIVE
 				AND isset($_POST['password'])) {
 	
 	if (strlen($_POST['username']) == 0) {
-		echo "<font color=red>A username must be entered</font><br>";
+		echo "<div class=red>A username must be entered</div><br>";
 		login("Return to login page");
 	}
 	
 	if (strlen($_POST['password']) == 0) {
-		echo "<font color=red>A password must be entered</font><br>";
+		echo "<div class=red>A password must be entered</div><br>";
 		login("Return to login page");
 	}
 	
@@ -166,19 +163,18 @@ else if (session_status() == PHP_SESSION_ACTIVE
 		if ($resultUsername == $_POST['username']) {
 			if ($resultPassword == $_POST['password']) {
 				$loggedIn = TRUE;
-				echo "<font color=green class=right-align>Logged in as $_POST[username]</font><br>";
 				break;
 			}
 			
 			else {
-				echo "<font color=red>Incorrect password</font><br>";
+				echo "<div class=red>Incorrect password</div><br>";
 				login("Return to login page");
 			}
 		}
 	}
 	
 	if (!$loggedIn) {
-		echo "<font color=red>That username was not found in the database</font><br>";
+		echo "<div class=red>That username was not found in the database</div><br>";
 		login("Return to login page");
 	}
 
@@ -194,7 +190,9 @@ else if (session_status() == PHP_SESSION_ACTIVE
 
 if ($loggedIn){
 	
-	$_SESSION['name'] = $_POST['username'];
+	if (isset($_POST['username']))
+		$_SESSION['name'] = $_POST['username'];
+	
 	$_SESSION['loggedIn'] = true;
 	$_visits = 'visits_' . $_SESSION['name'];
 	
@@ -205,6 +203,10 @@ if ($loggedIn){
 	
 	$content1_session = array();
 	$content1_session = $_SESSION;
+	
+	echo "<div class=right-align>
+					Logged in as <b id=loginName>$_SESSION[name]</b>
+				</div><br>";
 	
 	//echo "Hello $_SESSION[name], you have visited this page $_SESSION[$_visits] times before.  <br>";
 	echo "<a href='http://web.engr.oregonstate.edu/~rademace/ImageShare/UserAccountHandler.php?logout=1'

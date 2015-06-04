@@ -19,6 +19,12 @@ form {
 	margin-bottom: 10px;
 }
 
+.deleteForm {
+	margin: 0px;
+	padding: 0px;
+	border-radius: 0px;
+}
+
 input[type="file"] {
 	font-family: "Comic Sans MS", cursive, sans-serif;
 }
@@ -31,16 +37,24 @@ textarea, input[type="text"], input[type="password"], #loginButton {
 	margin-bottom: 30px;
 }
 
+.deleteButton {
+	margin: 0px;
+	padding: 0px;
+	border-radius: 5px;
+	border-color: #2E2E1F;
+	font: "Comic Sans MS 75% cursive, sans-serif";
+	color: orange;
+	background-color: #2E2E1F;
+	height: 30px;
+	width: 50px;
+	cursor: pointer;
+}
 
 #username, #password , #caption {
 	width: 300px;
 }
 
-.right-align {
-	float: right;
-}
-
-button {
+#creatAccount {
 	border-radius: 5px;
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	font-size: 2em;
@@ -49,7 +63,29 @@ button {
 	height: 150px;
 	width: 150px;
 	margin-left: 45%;
-	/* margin-right: 50%; */
 	margin-top: 10%;
-	/* margin-bottom: 50%; */
+}
+
+.right-align {
+	float: right;
+}
+
+div.right-align {
+	color: green;
+}
+
+.red {
+	color: red;
+}
+
+.blue {
+	color: blue;
+}
+
+.green {
+	color: green;
+}
+
+.orange {
+	color: orange;
 }

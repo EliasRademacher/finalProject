@@ -1,8 +1,25 @@
 <!DOCTYPE html>
 
 <?php
+
+if (isset($_POST['deleteID'])) {
+	if ($_POST['author'] != $_SESSION['name'])
+		echo "<div class=red>You are not authorized to delete that post</div>";
+	
+	else {
+		if (!($stmt = $mysqli->prepare("DELETE FROM Stories
+			WHERE id = $_POST[deleteID]")))
+			echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error . "<br>";
+			
+		if (!$stmt->execute())
+			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error . "<br>";
+	}
+	
+}
+
+
 if (!$loggedIn) {
-	echo 'You are not logged in<br>
+	echo '<div class=red>You are not logged in</div>
 		Click <a href="http://web.engr.oregonstate.edu/~rademace/ImageShare/ImageShareLogin.html">here</a>
 		to login<br>';
 	exit(0);
@@ -41,13 +58,13 @@ if (isset($_FILES['image']['name']))  {
 	$uploadfile = $uploaddir . "/" . $uploadfilename;
 	$tmpName = $_FILES['image']['tmp_name'];
 
-	if (0 < $_FILES['image']['error'])
+	if (0 < $_FILES['image']['error'] AND $_FILES['image']['error'] != 4)
 		echo 'Error: ' . $_FILES['image']['error'] . '<br>';
 
 	else {
 		$retVal = move_uploaded_file($tmpName, $uploadfile);
 		if (!$retVal)
-			echo "<font color=orange>File upload failed</font><br>";
+			echo "<div class=orange>File upload failed</div><br>";
 	}
 }
 
@@ -58,9 +75,6 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu",
 	"rademace-db", "8xYcLE6mhsNKxGMP", "rademace-db");
 if (!$mysqli || $mysqli->connect_errno)
 	echo "Connection error: " . $mysqli->connect_errno . " " . $mysqli->connect_error . "<br>";
-// else
-	// echo "<font color=green>Connected to onid database</font><br>";
-
 
 
 /* Create table if it does not already exist */
@@ -89,16 +103,16 @@ else if ($result->num_rows < 1) {
 
 
 /* Add posts to database */
-if(isset($_POST['title'])) {
+if(isset($_POST['title']) OR isset($_FILES['image']) OR isset($_POST['story'])) {
 		
 	if (strlen($_POST['title']) == 0) {
-		echo "<font color=red>Title is a required field</font><br>";
-		exit(0);
+		echo "<div class=red>Title is a required field</div><br>";
+		goto DISPLAY;
 	}
 	
-	if (!isset($_FILES['image'])) {
-		echo "<font color=red>You must select an image</font><br>";
-		exit(0);
+	if ($_FILES['image']['size'] < 10) {
+		echo "<div class=red>You must select an image</div><br>";
+		goto DISPLAY;
 	}
 	
 	else {
@@ -113,7 +127,7 @@ if(isset($_POST['title'])) {
 
 		if (!$statement->execute()) {
 			if ($statement->errno == 1062)
-				echo "<font color=red>This title is already being used</font><br>";
+				echo "<div class=red>This title is already being used</div><br>";
 			
 			else
 				echo "Execute failed: (" . $statement->errno . ") " . $statement->error . "<br>";
@@ -124,18 +138,23 @@ if(isset($_POST['title'])) {
 	}
 }
 
-
+DISPLAY:
 /* Display Images */
-if (!($statement = $mysqli->prepare("SELECT title, story, image, author FROM Stories")))
+if (!($statement = $mysqli->prepare("SELECT id, title, story, image, author FROM Stories")))
 	echo "prepare failed: (" . $mysqli->errno . ") " . $mysqli->error . "<br>";
-$statement->bind_param("sss", $title, $story, $image, $author); 
+$statement->bind_param("isss", $id, $title, $story, $image, $author); 
 if (!$statement->execute())
 	echo "Execute failed: (" . $statement->errno . ") " . $statement->error . "<br>";
-$statement->bind_result($resultTitle, $resultStory, $resultImage, $resultAuthor);
+$statement->bind_result($resultID, $resultTitle, $resultStory, $resultImage, $resultAuthor);
 
 
 while ($statement->fetch()) {
 	echo "<article>";
+	echo
+		"<form method=POST class=deleteForm>
+			<input type=text name=author value=$resultAuthor style='display: none;'></input>
+			<button type=submit name=deleteID value=$resultID class=deleteButton>Delete</button>
+		</form>";
 	echo "<h3>$resultTitle</h3>";
 	echo "<h4>by $resultAuthor</h4>";
 	echo "<img src='uploads/$resultImage' alt='uploads/$resultImage'/>";
