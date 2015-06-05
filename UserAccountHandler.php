@@ -123,7 +123,7 @@ if (isset($_POST['usernameInit'])
 		
 		echo "<h2 class=blue>Welcome, $usernameInit!<br>
 			Your account has been created</h2>
-			<h3 class=blue>click on a story below to read it,<br>
+			<h3 class=blue>click on an image below to read a story,<br>
 			or write your own</h3>";
 		$loggedIn = TRUE;
 			

@@ -22,7 +22,7 @@ form {
 	padding-left: 30px;	
 	padding-right: 30px;
 	text-align: right;
-	width: 35%;
+	width: 500px;
 	
 }
 
@@ -61,5 +61,5 @@ input[type="text"], input[type="password"] {
 	background-color: #0033CC;
 	height: 150px;
 	width: 150px;
-	margin-top: 10%;
+	margin-top: 7%;
 }

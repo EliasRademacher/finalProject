@@ -158,6 +158,7 @@ while ($statement->fetch()) {
 			<input type=text name=author value=$resultAuthor style='display: none;'></input>
 			<button type=submit name=deleteID value=$resultID class=deleteButton>Delete</button>
 		</form>";
+	echo "<button id=rotateButton>Rotate Image</button>";
 	echo "<h3>$resultTitle</h3>";
 	echo "<h4>by $resultAuthor</h4>";
 	echo "<img src='uploads/$resultImage' alt='uploads/$resultImage'/>";
