@@ -5,17 +5,13 @@ body {
 	padding-bottom: 25px;
 	padding-left: 50px;
 	background-image: url("bigsky.jpg");
-	/* background-repeat: no-repeat; */
+	text-align: center;
 }
 
 h1 {
-	border-radius: 5px;
 	color: #2E2E1F;
-	padding: 5px;
-	margin-left: 44%;
 	margin-bottom: 50px;
 	margin-top: 50px;
-	
 }
 
 form {
@@ -33,25 +29,32 @@ form {
 .deleteForm {
 	margin: 0px;
 	padding: 0px;
-	border-radius: 0px;
 }
 
 input[type="file"] {
 	font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
-textarea, input[type="text"], input[type="password"], #loginButton {
+textarea, input[type="text"]{
 	border-color: #669999;
 	border-width: 3px;
 	border-radius: 5px;
 	border-style: solid;
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	background-color: white;
-	margin-right: 40px;
+	margin-right: 2%;
 	margin-bottom: 30px;
 }
 
-.deleteButton {
+textarea {
+	width: 100%;
+}
+
+input[type="text"] {
+	width: 20%;
+}
+
+button {
 	float: right;
 	margin: 0px;
 	padding: 0px;
@@ -63,22 +66,6 @@ textarea, input[type="text"], input[type="password"], #loginButton {
 	height: 30px;
 	width: 50px;
 	cursor: pointer;
-}
-
-#username, #password , #caption {
-	width: 300px;
-}
-
-#creatAccount {
-	border-radius: 5px;
-	font-family: "Comic Sans MS", cursive, sans-serif;
-	font-size: 1.6em;
-	color: #CCFFFF;
-	background-color: #0033CC;
-	height: 150px;
-	width: 150px;
-	margin-left: 45%;
-	margin-top: 10%;
 }
 
 .right-align {

@@ -1,10 +1,7 @@
-// document.body.style.backgroundColor = "#003300"; 
-
 var story = document.getElementById("story");
 var loginName = document.getElementById("loginName");
 var loginName = document.getElementById("loginName");
 
-story.style.width = "100%";
 story.placeholder = "Write a little story here that took place in your photo. \
 	It can be fiction or nonfiction";
 
@@ -14,9 +11,6 @@ story.oninput =
 			this.style.height = "200px";
 			this.style.width = "100%";
 		}
-		
-		else if (this.style.height == "200px")
-			this.style.height = "";
 	};
 
 var articleList = document.getElementsByTagName("article");

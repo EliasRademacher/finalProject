@@ -3,7 +3,7 @@
  <head>
   <title>ImageShare Login</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<link rel="stylesheet" type="text/css" href="ImageShare.css">
+	<link rel="stylesheet" type="text/css" href="ImageShareLogin.css">
 	
  </head>
 <body>
@@ -12,26 +12,26 @@
 
 	<form method="post" action="UserAccountHandler.php" id="login">
 		<label for="username">Name: </label>
-		<input type="text" name="username" id="username" />
+		<input type="text" name="username" id="username" /><br>
 		
 		<label for="password">Password: </label>
-		<input type="password" name="password" id="password">
+		<input type="password" name="password" id="password"><br>
 		
-		<input type="submit" value="Login" id="loginButton"/>
+		<input type="submit" value="Login" id="loginButton"/><br>
 	</form>
 	
 	
 	<form method="post" action="UserAccountHandler.php" id="createAccount">
 		<label for="usernameInit"id="usernameInitLabel">Enter a username: </label>
-		<input type="text" name="usernameInit" id="usernameInit" />
+		<input type="text" name="usernameInit" id="usernameInit" /><br>
 		
 		<label for="passwordInit1">Choose a password: </label>
-		<input type="password" name="passwordInit1" id="passwordInit1">
+		<input type="password" name="passwordInit1" id="passwordInit1"><br>
 		
 		<label for="passwordInit2" id="passwordInit2Label">Confirm your password: </label>
-		<input type="password" name="passwordInit2" id="passwordInit2">
+		<input type="password" name="passwordInit2" id="passwordInit2"><br>
 		
-		<input type="submit" value="Submit" id="loginButton"/>
+		<input type="submit" value="Submit" id="loginButton"/><br>
 	</form>
 	
 	<button type="button" id="creatAccount">Create an Account</button> 
