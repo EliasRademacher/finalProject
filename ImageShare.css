@@ -4,12 +4,13 @@ body {
 	padding-right: 50px;
 	padding-bottom: 25px;
 	padding-left: 50px;
-	background-image: url("bigsky.jpg");
+	background-image: url("high-old-dry-grass.jpg");
 	text-align: center;
 }
 
 h1 {
-	color: #2E2E1F;
+	font-size: 3em;
+	color: black;
 	margin-bottom: 50px;
 	margin-top: 50px;
 }
@@ -41,7 +42,7 @@ input[type="file"] {
 }
 
 textarea, input[type="text"]{
-	border-color: #669999;
+	border-color: #CC3300;
 	border-width: 3px;
 	border-radius: 5px;
 	border-style: solid;
@@ -79,24 +80,39 @@ button {
 
 .right-align {
 	float: right;
-}
-
-div.right-align {
-	color: green;
-}
-
-.red {
-	color: red;
-}
-
-.blue {
-	color: #669999;
-}
-
-.green {
-	color: green;
+	color: orange;
+	background-color: #2E2E1F;
+	padding: 5px;
+	border-radius: 5px;
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E2E1F;
 }
 
 .orange {
+	margin-right: auto;
+	margin-left: auto;
+	width: 40%;
+	color: orange;
+	background-color: #2E2E1F;
+	padding: 5px;
+	border-radius: 5px;
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E2E1F;
+}
+
+a {
+	color: #CC3300;
+	background-color: #2E2E1F;
+	padding: 5px;
+	border-radius: 5px;
+	border-width: 3px;
+	border-style: solid;
+	border-color: #2E2E1F;
+}
+
+label {
 	color: orange;
 }
+

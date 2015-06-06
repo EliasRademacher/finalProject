@@ -75,17 +75,17 @@ if (isset($_POST['usernameInit'])
 	if(isset($_POST['usernameInit'])) {
 			
 		if (strlen($_POST['usernameInit']) == 0) {
-			echo "<div class=red>username is a required field</div><br>";
+			echo "<div class=orange>username is a required field</div><br>";
 			login("Return to login page");
 		}
 		
 		if (!isset($_POST['passwordInit1']) OR strlen($_POST['passwordInit1']) == 0) {
-			echo "<div class=red>You must enter a password</div><br>";
+			echo "<div class=orange>You must enter a password</div><br>";
 			login("Return to login page");
 		}
 		
 		if (!isset($_POST['passwordInit2']) OR strlen($_POST['passwordInit2']) == 0) {
-			echo "<div class=red>You must confirm your password</div><br>";
+			echo "<div class=orange>You must confirm your password</div><br>";
 			login("Return to login page");
 		}
 		
@@ -99,7 +99,7 @@ if (isset($_POST['usernameInit'])
 		}
 		
 		else {
-			echo "<div class=red>Passwords do not match.</div><br><br>";
+			echo "<div class=orange>Passwords do not match.</div><br><br>";
 			login("Return to login page");
 		}
 		
@@ -111,7 +111,7 @@ if (isset($_POST['usernameInit'])
 		if (!$statement->execute()) {
 			
 			if ($statement->errno == 1062) {
-				echo "<div class=red>This username is taken</div><br>";
+				echo "<div class=orange>This username is taken</div><br>";
 				login("Return to login page");
 			}
 		
@@ -121,9 +121,9 @@ if (isset($_POST['usernameInit'])
 		
 		$statement->close();
 		
-		echo "<h2 class=blue>Welcome, $usernameInit!<br>
-			Your account has been created</h2>
-			<h3 class=blue>click on an image below to read a story,<br>
+		echo "<h3 class=orange>Welcome, $usernameInit!<br>
+			Your account has been created<br>
+			click on an image below to read a story,<br>
 			or write your own</h3>";
 		$loggedIn = TRUE;
 			
@@ -148,12 +148,12 @@ else if (session_status() == PHP_SESSION_ACTIVE
 	
 	
 	if (strlen($_POST['username']) == 0) {
-		echo "<div class=red>A username must be entered</div><br>";
+		echo "<div class=orange>A username must be entered</div><br>";
 		login("Return to login page");
 	}
 	
 	if (strlen($_POST['password']) == 0) {
-		echo "<div class=red>A password must be entered</div><br>";
+		echo "<div class=orange>A password must be entered</div><br>";
 		login("Return to login page");
 	}
 	
@@ -176,14 +176,14 @@ else if (session_status() == PHP_SESSION_ACTIVE
 			}
 			
 			else {
-				echo "<div class=red>Incorrect password</div><br>";
+				echo "<div class=orange>Incorrect password</div><br>";
 				login("Return to login page");
 			}
 		}
 	}
 	
 	if (!$loggedIn) {
-		echo "<div class=red>That username was not found in the database</div><br>";
+		echo "<div class=orange>That username was not found in the database</div><br>";
 		login("Return to login page");
 	}
 
@@ -220,11 +220,12 @@ if ($loggedIn){
 	$content1_session = $_SESSION;
 	
 	echo "<div class=right-align>
-					Logged in as <b id=loginName>$_SESSION[name]</b>
+					Logged in as <b id=loginName>$_SESSION[name]</b><br>
+					<a href='http://web.engr.oregonstate.edu/~rademace/ImageShare/UserAccountHandler.php?logout=1'
+					class=right-align>Logout</a><br>
 				</div><br>";
 
-	echo "<a href='http://web.engr.oregonstate.edu/~rademace/ImageShare/UserAccountHandler.php?logout=1'
-		class=right-align>Logout</a><br>";
+
 	
 }
 

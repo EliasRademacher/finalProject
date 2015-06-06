@@ -6,7 +6,7 @@ if (isset($_POST['deleteID'])) {
 	if ($_POST['author'] != $_SESSION['name']) {
 		var_dump($_POST['author']);
 		var_dump($_SESSION['name']);
-		echo "<div class=red>You are not authorized to delete that post</div>";
+		echo "<div class=orange>You are not authorized to delete that post</div>";
 	}
 	
 	else {
@@ -22,7 +22,7 @@ if (isset($_POST['deleteID'])) {
 
 
 if (!$loggedIn) {
-	echo '<div class=blue>You are not logged in</div>
+	echo '<div class=orange>You are not logged in</div>
 		Click <a href="http://web.engr.oregonstate.edu/~rademace/ImageShare/ImageShareLogin.html">here</a>
 		to login<br>';
 	exit(0);
@@ -66,8 +66,8 @@ if (isset($_FILES['image']['name']))  {
 
 	else {
 		$retVal = move_uploaded_file($tmpName, $uploadfile);
-		if (!$retVal)
-			echo "<div class=orange>File upload failed</div><br>";
+		// if (!$retVal)
+			// echo "<div class=orange>File upload failed</div><br>";
 	}
 }
 
@@ -109,12 +109,12 @@ else if ($result->num_rows < 1) {
 if(isset($_POST['title']) OR isset($_FILES['image']) OR isset($_POST['story'])) {
 		
 	if (strlen($_POST['title']) == 0) {
-		echo "<div class=red>Title is a required field</div><br>";
+		echo "<div class=orange>Title is a required field</div><br>";
 		goto DISPLAY;
 	}
 	
 	if ($_FILES['image']['size'] < 10) {
-		echo "<div class=red>You must select an image</div><br>";
+		echo "<div class=orange>You must select an image</div><br>";
 		goto DISPLAY;
 	}
 	
@@ -130,7 +130,7 @@ if(isset($_POST['title']) OR isset($_FILES['image']) OR isset($_POST['story'])) 
 
 		if (!$statement->execute()) {
 			if ($statement->errno == 1062)
-				echo "<div class=red>This title is already being used</div><br>";
+				echo "<div class=orange>This title is already being used</div><br>";
 			
 			else
 				echo "Execute failed: (" . $statement->errno . ") " . $statement->error . "<br>";

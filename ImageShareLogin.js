@@ -42,15 +42,20 @@ passwordInit1.oninput =
 	
 usernameInit.oninput = 
 	function() {
-		usernameInitLabel.style.color = "white";
+		usernameInitLabel.style.color = "orange";
 		if (-1 != usernameInit.value.indexOf(" ")) {
 			usernameInitLabel.innerHTML = "No spaces, please";
 			usernameInitLabel.style.color = "red";
 		}
 		
+		else if (-1 != usernameInit.value.indexOf("!")) {
+			usernameInitLabel.innerHTML = "No exclamation points, please";
+			usernameInitLabel.style.color = "red";
+		}
+		
 		else {
 			usernameInitLabel.innerHTML = "Enter a username:";
-			usernameInitLabel.style.color = "white";
+			usernameInitLabel.style.color = "orange";
 		}
 	};
 
